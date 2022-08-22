@@ -34,7 +34,7 @@ data class MovieDBO(
 
     // Data access object
 
-    @Dao
+    /*@Dao
     interface DAO {
 
         @Query("SELECT * FROM movies")
@@ -45,6 +45,21 @@ data class MovieDBO(
 
         @Delete
         fun delete(movie: MovieDBO)
+
+        @Query("SELECT COUNT (*) FROM movies")
+        fun count(): Int
+
+    }*/
+
+    //TODO:
+    @Dao
+    interface DAO :  BaseDAO<MovieDBO> {
+
+        @Query("SELECT * FROM movies")
+        fun liveData(): LiveData<List<MovieDBO>>
+
+        @Insert(onConflict = OnConflictStrategy.REPLACE)
+        fun insertAll(vararg movies: MovieDBO)
 
         @Query("SELECT COUNT (*) FROM movies")
         fun count(): Int

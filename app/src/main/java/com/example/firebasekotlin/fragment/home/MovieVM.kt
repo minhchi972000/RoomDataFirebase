@@ -2,26 +2,28 @@ package com.example.firebasekotlin.fragment.home
 
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.firebasekotlin.data.db.AppDatabase
 import com.example.firebasekotlin.data.db.MovieDBO
-import com.google.firebase.firestore.DocumentChange
+import com.example.firebasekotlin.data.db.roomDB
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class MovieVM : ViewModel() {
 
+    //TODO: dat ten tuong minh ra: vd: movieListLiveData
+    // tại sao lại là var mà không phải là val ???
     private var _movieData: MutableLiveData<List<MovieDBO>> = MutableLiveData<List<MovieDBO>>()
+    // TODO: thay vì tạo liveData này sao ko sử dụng roomDB.movieDao()].liveData():
+    val movieListLiveData get() = roomDB.movieDao().liveData()
+
     val movieData: LiveData<List<MovieDBO>>
         get() = _movieData
 
+    //TODO: dat ten tuong minh ra: vd: errorLiveData
     private var _errEvent: MutableLiveData<String> = MutableLiveData<String>()
     val errEvent: LiveData<String>
         get() = _errEvent
@@ -49,7 +51,8 @@ class MovieVM : ViewModel() {
                     // insert vao database
                     Log.d("home", "insert to movie table item: ${characters.title}")
                     movieDao.insertAll(characters)
-                    _movieData.postValue(listOf(characters))
+                    // TODO: thay vì tạo liveData này sao ko sử dụng roomDB.movieDao()].liveData():
+                    //_movieData.postValue(listOf(characters))
                 }
                 // kiem tra database co may record
                 val itemCount = movieDao.count()
@@ -66,6 +69,7 @@ class MovieVM : ViewModel() {
         db.collection("Movies")
             .get()
             .addOnCompleteListener {
+                //TODO: không cần check data trước khi update
                 if (it.isSuccessful && !it.result.isEmpty) {
 
                     val document = it.result.documents.get(0)
@@ -89,7 +93,7 @@ class MovieVM : ViewModel() {
 
 
     fun getMovies(): LiveData<List<MovieDBO>> {
-        return movieDao.getAll()
+        return movieDao.liveData()
     }
 
 }

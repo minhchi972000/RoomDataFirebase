@@ -30,5 +30,19 @@ abstract class AppDatabase :RoomDatabase() {
                 instance
             }
         }
+
+        //TODO: should use below code
+        val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED){
+            Room.databaseBuilder(app, AppDatabase::class.java, "movie_database")
+                .allowMainThreadQueries()
+                .build()
+        }
     }
+}
+//TODO: //
+
+val roomDB by lazy(LazyThreadSafetyMode.SYNCHRONIZED){
+    Room.databaseBuilder(app, AppDatabase::class.java, "movie_database")
+        .allowMainThreadQueries()
+        .build()
 }

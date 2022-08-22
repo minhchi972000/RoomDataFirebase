@@ -57,11 +57,30 @@ class MovieFragment : Fragment() {
         val lm = LinearLayoutManager(context)
         vb.recyclerViewMovie.layoutManager = lm
         vb.recyclerViewMovie.adapter = adapter
+
+        //TODO: phải viết cách method cụ thể để dễ đọc code và tìm
+        //  vd:
+        adapter.onItemClick = this::onMovieItemClick
+        // hoặc
+        adapter.onItemClick = {
+            onMovieItemClick(it)
+        }
+
+
         adapter.onItemClick = { movie ->
             println(movie.title)
             Log.d("movieFragment", "${movie.title}")
             Log.d("movie", "${movie.vote.toString().toDouble()}")
 
+            //TODO:
+            /**
+             * Có rất nhiều cách để share data giữa các fragment:
+             * bundle, navigation arguments, sử sụng viewModel...
+             * Cách nào cũng chạy được nhưng thay vì sử dụng nhiều cách khác nhau ở nhiều chỗ code khác nhau
+             * mình thống nhất là dự dụng cách này:
+             * [https://developer.android.com/guide/fragments/communicate]
+             * cho nó tiện và ngắn gọn :)
+             */
             val bundle = bundleOf(
                 "movieTitle" to movie.title,
                 "movieDescription" to movie.description,
@@ -112,9 +131,34 @@ class MovieFragment : Fragment() {
         }
     }
 
+    private fun onMovieItemClick(movie: MovieDBO){
+        println(movie.title)
+        Log.d("movieFragment", "${movie.title}")
+        Log.d("movie", "${movie.vote.toString().toDouble()}")
+
+        //TODO:
+        /**
+         * Có rất nhiều cách để share data giữa các fragment:
+         * bundle, navigation arguments, sử sụng viewModel...
+         * Cách nào cũng chạy được nhưng thay vì sử dụng nhiều cách khác nhau ở nhiều chỗ code khác nhau
+         * mình thống nhất là dự dụng cách này:
+         * [https://developer.android.com/guide/fragments/communicate]
+         * cho nó tiện :)
+         */
+        val bundle = bundleOf(
+            "movieTitle" to movie.title,
+            "movieDescription" to movie.description,
+            "movieBackground" to movie.background,
+            "movievote" to movie.vote.toString(),
+        )
+        findNavController().navigate(R.id.action_movieFragment_to_detailFragment, bundle)
+    }
+
     private fun registerData() {
-        movieVM.getMovies().observe(viewLifecycleOwner) {
+        movieVM.movieListLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            //TODO: ListAdapter.submitList là nó có so sánh list mới và cũ để update rồi
+            // ko cần notifyDataSetChanged
             adapter.notifyDataSetChanged()
         }
 
