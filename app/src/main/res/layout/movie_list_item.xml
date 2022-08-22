@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <ImageView
+        android:id="@+id/imgMovie"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="18dp"
+        tools:src="@drawable/movie"
+        android:src="@drawable/otp_unselected" />
+
+    <LinearLayout
+        android:padding="@dimen/size10dp"
+        android:layout_toRightOf="@id/imgMovie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/txtMovieName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Name of Movie"
+            tools:text="Your name"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtMovieDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Description"
+            tools:text="A young woman survives a great white shark ..."
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textColor="#5B5B5E"
+            android:textSize="14sp"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

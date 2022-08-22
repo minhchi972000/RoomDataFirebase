@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1067308696029",
+    "project_id": "weedigitalfirebasecloudstore",
+    "storage_bucket": "weedigitalfirebasecloudstore.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067308696029:android:0d9428c48cce5fe9877634",
+        "android_client_info": {
+          "package_name": "com.example.firebasekotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067308696029-f0fbdc0c5elfg6fc9qgrnrctdblomcas.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGP6jlXwuPEa1P0DhvjgpK9OpwNSZGO5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067308696029-f0fbdc0c5elfg6fc9qgrnrctdblomcas.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/movieFragment">
+
+    <fragment
+        android:id="@+id/movieFragment"
+        tools:layout="@layout/movie_list"
+        android:name="com.example.firebasekotlin.fragment.home.MovieFragment"
+        android:label="MovieFragment" >
+        <action
+            android:id="@+id/action_movieFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        tools:layout="@layout/detail_list"
+        android:name="com.example.firebasekotlin.fragment.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="background"
+            app:argType="string" />
+        <argument
+            android:name="vote"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="poster"
+            app:argType="string" />
+
+    </fragment>
+</navigation>
