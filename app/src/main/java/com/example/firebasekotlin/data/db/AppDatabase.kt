@@ -31,7 +31,7 @@ abstract class AppDatabase :RoomDatabase() {
             }
         }
 
-        //TODO: should use below code
+        //TODO: code như này cho ngắn, dử dụng: AppDatabase.instance.movieDao()
         val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED){
             Room.databaseBuilder(app, AppDatabase::class.java, "movie_database")
                 .allowMainThreadQueries()
@@ -39,8 +39,7 @@ abstract class AppDatabase :RoomDatabase() {
         }
     }
 }
-//TODO: //
-
+//TODO: như này cho ngắn hơn, dử dụng: roomDB.movieDao()
 val roomDB by lazy(LazyThreadSafetyMode.SYNCHRONIZED){
     Room.databaseBuilder(app, AppDatabase::class.java, "movie_database")
         .allowMainThreadQueries()

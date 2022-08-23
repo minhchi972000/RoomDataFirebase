@@ -58,13 +58,7 @@ class MovieFragment : Fragment() {
         vb.recyclerViewMovie.layoutManager = lm
         vb.recyclerViewMovie.adapter = adapter
 
-        //TODO: phải viết cách method cụ thể để dễ đọc code và tìm
-        //  vd:
-        adapter.onItemClick = this::onMovieItemClick
-        // hoặc
-        adapter.onItemClick = {
-            onMovieItemClick(it)
-        }
+
 
 
         adapter.onItemClick = { movie ->
@@ -90,6 +84,13 @@ class MovieFragment : Fragment() {
             findNavController().navigate(R.id.action_movieFragment_to_detailFragment, bundle)
         }
 
+        //TODO: nên viết method cụ thể theo từng process để dễ đọc code và tìm
+        //  vd:
+        adapter.onItemLongClick = this::onItemLongClick
+        // hoặc
+        adapter.onItemLongClick = {
+            onItemLongClick(it)
+        }
         adapter.onItemLongClick = { movie->
 
             val dialogLayout = layoutInflater.inflate(R.layout.movie_list_item_longclick, null)
@@ -131,27 +132,8 @@ class MovieFragment : Fragment() {
         }
     }
 
-    private fun onMovieItemClick(movie: MovieDBO){
-        println(movie.title)
-        Log.d("movieFragment", "${movie.title}")
-        Log.d("movie", "${movie.vote.toString().toDouble()}")
-
-        //TODO:
-        /**
-         * Có rất nhiều cách để share data giữa các fragment:
-         * bundle, navigation arguments, sử sụng viewModel...
-         * Cách nào cũng chạy được nhưng thay vì sử dụng nhiều cách khác nhau ở nhiều chỗ code khác nhau
-         * mình thống nhất là dự dụng cách này:
-         * [https://developer.android.com/guide/fragments/communicate]
-         * cho nó tiện :)
-         */
-        val bundle = bundleOf(
-            "movieTitle" to movie.title,
-            "movieDescription" to movie.description,
-            "movieBackground" to movie.background,
-            "movievote" to movie.vote.toString(),
-        )
-        findNavController().navigate(R.id.action_movieFragment_to_detailFragment, bundle)
+    private fun onItemLongClick(movie: MovieDBO){
+        //...
     }
 
     private fun registerData() {

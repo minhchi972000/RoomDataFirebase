@@ -51,10 +51,9 @@ data class MovieDBO(
 
     }*/
 
-    //TODO:
+    //TODO: strick for like a pro
     @Dao
     interface DAO :  BaseDAO<MovieDBO> {
-
         @Query("SELECT * FROM movies")
         fun liveData(): LiveData<List<MovieDBO>>
 
@@ -63,7 +62,6 @@ data class MovieDBO(
 
         @Query("SELECT COUNT (*) FROM movies")
         fun count(): Int
-
     }
 
     companion object {
