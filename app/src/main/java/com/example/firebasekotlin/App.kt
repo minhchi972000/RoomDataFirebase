@@ -1,7 +1,6 @@
 package com.example.firebasekotlin
 
 import android.app.Application
-import com.example.firebasekotlin.data.db.AppDatabase
 
 
 lateinit var app: App

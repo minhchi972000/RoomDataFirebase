@@ -1,10 +1,8 @@
 package com.example.firebasekotlin.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.firebasekotlin.R
 import com.example.firebasekotlin.data.db.MovieDBO

@@ -1,10 +1,8 @@
 package com.example.firebasekotlin.data.db
 
-import androidx.annotation.Keep
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.*
-import java.io.Serializable
 
 /**
  * DBO (Database object)
@@ -33,23 +31,6 @@ data class MovieDBO(
 ) {
 
     // Data access object
-
-    /*@Dao
-    interface DAO {
-
-        @Query("SELECT * FROM movies")
-        fun getAll(): LiveData<List<MovieDBO>>
-
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
-        fun insertAll(vararg movies: MovieDBO)
-
-        @Delete
-        fun delete(movie: MovieDBO)
-
-        @Query("SELECT COUNT (*) FROM movies")
-        fun count(): Int
-
-    }*/
 
     //TODO: strick for like a pro
     @Dao

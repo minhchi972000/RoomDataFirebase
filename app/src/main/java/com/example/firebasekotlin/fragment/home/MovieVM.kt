@@ -2,10 +2,8 @@ package com.example.firebasekotlin.fragment.home
 
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.firebasekotlin.data.db.AppDatabase
 import com.example.firebasekotlin.data.db.MovieDBO
 import com.example.firebasekotlin.data.db.roomDB
 import com.google.firebase.firestore.FieldPath
@@ -14,21 +12,12 @@ import com.google.firebase.ktx.Firebase
 
 class MovieVM : ViewModel() {
 
-    //TODO: dat ten tuong minh ra: vd: movieListLiveData
-    // tại sao lại là var mà không phải là val ???
-    private var _movieData: MutableLiveData<List<MovieDBO>> = MutableLiveData<List<MovieDBO>>()
-    // TODO: thay vì tạo liveData này sao ko sử dụng roomDB.movieDao()].liveData():
+
+    val movieDao get() = roomDB.movieDao()
+
     val movieListLiveData get() = roomDB.movieDao().liveData()
 
-    val movieData: LiveData<List<MovieDBO>>
-        get() = _movieData
-
-    //TODO: dat ten tuong minh ra: vd: errorLiveData
-    private var _errEvent: MutableLiveData<String> = MutableLiveData<String>()
-    val errEvent: LiveData<String>
-        get() = _errEvent
-
-    val movieDao get() = AppDatabase.getDatabase().movieDao()
+    private val errorLiveData = MutableLiveData<String>()
 
     fun syncDataMovie() {
         val db = Firebase.firestore
@@ -51,8 +40,6 @@ class MovieVM : ViewModel() {
                     // insert vao database
                     Log.d("home", "insert to movie table item: ${characters.title}")
                     movieDao.insertAll(characters)
-                    // TODO: thay vì tạo liveData này sao ko sử dụng roomDB.movieDao()].liveData():
-                    //_movieData.postValue(listOf(characters))
                 }
                 // kiem tra database co may record
                 val itemCount = movieDao.count()
@@ -87,13 +74,6 @@ class MovieVM : ViewModel() {
                 }
             }
         Log.d("log","${FieldPath.documentId()}")
-
-
-    }
-
-
-    fun getMovies(): LiveData<List<MovieDBO>> {
-        return movieDao.liveData()
     }
 
 }
